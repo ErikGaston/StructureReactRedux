@@ -1,0 +1,7 @@
+/* NAME */
+export const SUCCESS_GET_EJEMPLO = "SUCCESS_GET_EJEMPLO";
+export const GET_EJEMPLO = "GET_EJEMPLO";
+
+/* ERROR */
+export const SEND_REQUEST_FAILURE = "SEND_REQUEST_FAILURE";
+
