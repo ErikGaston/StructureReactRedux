@@ -5,22 +5,29 @@ import {
 } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import LoadingPage from "./components/atoms/LoadingPage/LoadingPage";
+import background from './assets/images/background.png';
 
 const Home = lazy(() => import('./pages/Home/index'));
 
 export const routes = (
-    <Routes >
-        {/*Rutas publicas*/}
-        <Route path="/" exact={true} element={<Home />} />
+    <TransitionGroup style={{ minHeight: '100vh' }}>
+        <CSSTransition timeout={500} >
+            <Suspense fallback={<LoadingPage background={background} />}>
+                <Routes >
+                    {/*Rutas publicas*/}
+                    <Route index path="/" exact element={<Home />} />
 
-        {/*Rutas privadas*/}
-        <Route path="/private" element={
-            <PrivateRoute>
-                <Home />
-            </PrivateRoute>
-        } />
+                    {/*Rutas privadas*/}
+                    <Route path="/private" element={
+                        <PrivateRoute>
+                            <Home />
+                        </PrivateRoute>
+                    } />
 
-        <Route path="*" exact={true} element={<Home />} />
-    </Routes>
-
+                    <Route path="*" element={<Home />} />
+                </Routes>
+            </Suspense>
+        </CSSTransition>
+    </TransitionGroup>
 );
